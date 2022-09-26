@@ -5,7 +5,7 @@ require "./src/reverse_polish_calculator"
 if __FILE__ == $0
   # TODO コマンドライン引数のエラー制御
 
-  csa = CalculateSymbolParser.new(ARGV[0])
-  calculator = ReversePolishCalculator.new(csa.parse)
+  csp = CalculateSymbolParser.new(ARGV[0])
+  calculator = ReversePolishCalculator.new(csp.parse)
   puts calculator.calculation
 end

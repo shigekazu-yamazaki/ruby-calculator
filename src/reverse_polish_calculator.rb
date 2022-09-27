@@ -1,32 +1,36 @@
 class ReversePolishCalculator
 
   def initialize(expression)
-    # TODO 引数のバリデーション
-    @calculate_target_stack = []
-    expression.each do |el|
-      @calculate_target_stack.push(el)
-    end
+    @calculation_target = expression
   end
 
   def calculation
-    left = @calculate_target_stack[0].to_i
-    right = @calculate_target_stack[1].to_i
-    operator = @calculate_target_stack[2]
+    stack = []
 
-    ans = 0
-    case operator
-    when "+"
-      ans = left + right
-    when "-"
-      ans = left - right
-    when "*"
-      ans = left * right
-    when "/"
-      ans = left / right
-    else
-      # TODO 上記以外は受け付けない
+    @calculation_target.each do |token|
+      case token
+      when Integer
+        stack.push(token)
+      when "+"
+        a = stack.pop
+        b = stack.pop
+        stack.push(a + b)
+      when "-"
+        a = stack.pop
+        b = stack.pop
+        stack.push(b - a)
+      when "*"
+        a = stack.pop
+        b = stack.pop
+        stack.push(a * b)
+      when "/"
+        a = stack.pop
+        b = stack.pop
+        stack.push(b / a)
+      else
+        # TODO 上記以外は受け付けない
+      end
     end
-
-    ans
+    stack.pop
   end
 end

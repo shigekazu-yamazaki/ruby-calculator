@@ -1,14 +1,14 @@
 require "rspec"
-require "./src/calculate_symbol_parser"
+require "./src/text_parser"
 
-RSpec.describe CalculateSymbolParser do
+RSpec.describe TextParser do
   it("Should create instance") do
-    csp = CalculateSymbolParser.new("1+1")
-    expect(csp.instance_of?(CalculateSymbolParser)).to eq true
+    csp = TextParser.new("1+1")
+    expect(csp.instance_of?(TextParser)).to eq true
   end
 
   it("Should success parse") do
-    csp = CalculateSymbolParser.new("1+2")
+    csp = TextParser.new("1+2")
     symbols = csp.parse
 
     expect(symbols.instance_of?(Array)).to eq true
@@ -22,10 +22,10 @@ RSpec.describe CalculateSymbolParser do
   end
 
   it("Should return true when argument is number") do
-    expect(CalculateSymbolParser.new("1+1").send(:is_number, "1")).to eq true
+    expect(TextParser.new("1+1").send(:is_number, "1")).to eq true
   end
 
   it("Should return false when argument is not number") do
-    expect(CalculateSymbolParser.new("1+1").send(:is_number, "A")).to eq false
+    expect(TextParser.new("1+1").send(:is_number, "A")).to eq false
   end
 end

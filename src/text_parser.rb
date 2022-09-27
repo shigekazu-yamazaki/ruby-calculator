@@ -1,5 +1,4 @@
-# 1+1 に対して
-class CalculateSymbolParser
+class TextParser
   def initialize(symbol)
     @parse_target = symbol
   end
@@ -25,7 +24,6 @@ class CalculateSymbolParser
     end
 
     parsed_array = []
-
     i = 0
     while i < token_array.size
       # TODO 質問: 前回は kind_of? を使ったが、is_a? だと良くない？

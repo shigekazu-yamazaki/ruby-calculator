@@ -1,32 +1,44 @@
+# 1+1 に対して
 class CalculateSymbolParser
   def initialize(symbol)
-    # TODO 引数のバリデーション
     @parse_target = symbol
   end
 
   def parse
-    parsed_array = []
+    token_array = []
     consecutive_number = ""
-    next_operator = ""
 
     @parse_target.each_char do |char|
       if is_number(char)
         consecutive_number << char
       else
         unless consecutive_number.empty?
-          parsed_array.append(consecutive_number.to_i)
+          token_array.append(consecutive_number.to_i)
           consecutive_number = ""
         end
-        next_operator = char
+        token_array.append(char)
       end
     end
 
     unless consecutive_number.empty?
-      parsed_array.append(consecutive_number.to_i)
-      consecutive_number = ""
+      token_array.append(consecutive_number.to_i)
     end
 
-    parsed_array.append(next_operator)
+    parsed_array = []
+
+    i = 0
+    while i < token_array.size
+      # TODO 質問: 前回は kind_of? を使ったが、is_a? だと良くない？
+      if token_array[i].is_a?(Integer)
+        parsed_array.push(token_array[i])
+      else
+        parsed_array.push(token_array[i + 1])
+        parsed_array.push(token_array[i])
+        i += 1
+      end
+      i += 1
+    end
+    p parsed_array
 
     parsed_array
   end

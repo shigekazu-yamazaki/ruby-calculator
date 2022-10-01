@@ -7,14 +7,13 @@ class TextParser
     token_array = []
     consecutive_number = ""
 
-    # %w[+ -].find { |str| str === @parse_target[0] }
     @parse_target.each_char.with_index do |char, index|
-      p char
       if is_number(char)
         consecutive_number << char
       else
         unless consecutive_number.empty?
-          token_array.append(consecutive_number.to_i)
+          number = consecutive_number.include?(".") ? consecutive_number.to_f : consecutive_number.to_i
+          token_array.append(number)
           consecutive_number = ""
         end
 
@@ -27,14 +26,14 @@ class TextParser
     end
 
     unless consecutive_number.empty?
-      token_array.append(consecutive_number.to_i)
+      number = consecutive_number.include?(".") ? consecutive_number.to_f : consecutive_number.to_i
+      token_array.append(number)
     end
 
     parsed_array = []
     i = 0
     while i < token_array.size
-      # TODO 質問: 前回は kind_of? を使ったが、is_a? だと良くない？
-      if token_array[i].is_a?(Integer)
+      if token_array[i].is_a?(Numeric)
         parsed_array.push(token_array[i])
       else
         parsed_array.push(token_array[i + 1])
@@ -53,6 +52,6 @@ class TextParser
   @parse_target = ""
 
   def is_number(char)
-    !!(char =~ /^[0-9]+$/)
+    !!(char =~ /^[0-9.]+$/)
   end
 end

@@ -8,25 +8,19 @@ RSpec.describe ReversePolishCalculator do
   end
 
   it("Should success calculate") do
-    # 1 + 2
     expect(ReversePolishCalculator.new([1, 2, "+"]).calculation).to eq 3
-
-    # 1-2
     expect(ReversePolishCalculator.new([1, 2, "-"]).calculation).to eq(-1)
-
-    # 2 * 2
     expect(ReversePolishCalculator.new([2, 2, "*"]).calculation).to eq 4
-
-    # 3 * 2 + 4
     expect(ReversePolishCalculator.new([4, 2, 3, "*", "+"]).calculation).to eq 10
-
-    # 100 / 50 / 2
     expect(ReversePolishCalculator.new([10, 2, "/"]).calculation).to eq 5
   end
 
-  it("Should success calculate if first token is signed number") do
-    # -1 + 2
-    expect(ReversePolishCalculator.new([-1, 2, "+"]).calculation).to eq 1
+  it("Should success calculate if token is includes signed number") do
+    expect(ReversePolishCalculator.new([-1, -2, "+"]).calculation).to eq(-3)
+  end
+
+  it("Should success calculate if token is includes decimal point") do
+    expect(ReversePolishCalculator.new([0.1, 0.2, "+"]).calculation).to eq 0.3
   end
 
   it("Should fail calculate") do

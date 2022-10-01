@@ -34,6 +34,20 @@ RSpec.describe TextParser do
     expect(tokens[2]).to eq "+"
   end
 
+  it("Should success parse if includes decimal point") do
+    tokens = TextParser.new("0.1+0.2").parse
+    expect(tokens[0]).to eq(0.1)
+    expect(tokens[1]).to eq(0.2)
+    expect(tokens[2]).to eq "+"
+  end
+
+  it("Should success parse if includes signed decimal point number") do
+    tokens = TextParser.new("-0.1+-0.2").parse
+    expect(tokens[0]).to eq(-0.1)
+    expect(tokens[1]).to eq(-0.2)
+    expect(tokens[2]).to eq "+"
+  end
+
   it("Should return true when argument is number") do
     expect(TextParser.new("1+1").send(:is_number, "1")).to eq true
   end

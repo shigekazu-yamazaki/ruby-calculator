@@ -1,3 +1,5 @@
+require 'bigdecimal'
+
 class ReversePolishCalculator
 
   def initialize(expression)
@@ -8,10 +10,9 @@ class ReversePolishCalculator
     stack = []
 
     @calculation_target.each do |token|
-      p stack, token
       case token
-      when Integer
-        stack.push(token)
+      when Numeric
+        stack.push(BigDecimal(token.to_s))
       when "+"
         a = stack.pop
         b = stack.pop

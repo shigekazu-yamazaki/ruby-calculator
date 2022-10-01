@@ -3,13 +3,13 @@ require "./src/text_parser"
 
 RSpec.describe TextParser do
   it("Should create instance") do
-    csp = TextParser.new("1+1")
-    expect(csp.instance_of?(TextParser)).to eq true
+    tp = TextParser.new("1+1")
+    expect(tp.instance_of?(TextParser)).to eq true
   end
 
   it("Should success parse") do
-    csp = TextParser.new("1+2")
-    symbols = csp.parse
+    tp = TextParser.new("1+2")
+    symbols = tp.parse
 
     expect(symbols.instance_of?(Array)).to eq true
     expect(symbols.length).to eq 3

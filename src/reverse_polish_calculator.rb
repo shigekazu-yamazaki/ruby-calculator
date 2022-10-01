@@ -28,7 +28,7 @@ class ReversePolishCalculator
         b = stack.pop
         stack.push(b / a)
       else
-        # TODO 上記以外は受け付けない
+        raise(StandardError, "Unexpected token: #{token}")
       end
     end
     stack.pop

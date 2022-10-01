@@ -24,9 +24,13 @@ RSpec.describe TextParser do
 
   it("Should success parse if first token is signed number") do
     tokens = TextParser.new("-1+-2").parse
-    p tokens
     expect(tokens[0]).to eq(-1)
     expect(tokens[1]).to eq(-2)
+    expect(tokens[2]).to eq "+"
+
+    tokens = TextParser.new("+1++2").parse
+    expect(tokens[0]).to eq(1)
+    expect(tokens[1]).to eq(2)
     expect(tokens[2]).to eq "+"
   end
 

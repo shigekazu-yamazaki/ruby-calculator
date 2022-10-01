@@ -7,12 +7,9 @@ class TextParser
     token_array = []
     consecutive_number = ""
 
-    if %w[+ -].find { |char| char === @parse_target[0] }
-      consecutive_number << @parse_target[0]
-      @parse_target.slice!(0, 1)
-    end
-
-    @parse_target.each_char do |char|
+    # %w[+ -].find { |str| str === @parse_target[0] }
+    @parse_target.each_char.with_index do |char, index|
+      p char
       if is_number(char)
         consecutive_number << char
       else
@@ -20,7 +17,13 @@ class TextParser
           token_array.append(consecutive_number.to_i)
           consecutive_number = ""
         end
-        token_array.append(char)
+
+        # 数字以外を見たとき、1つ前の文字が数字以外ならappend, そうでないなら数値の一部とみなす
+        if index > 0 && is_number(@parse_target[index - 1])
+          token_array.append(char)
+        else
+          consecutive_number << char
+        end
       end
     end
 

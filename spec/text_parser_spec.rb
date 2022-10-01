@@ -9,27 +9,24 @@ RSpec.describe TextParser do
 
   it("Should success parse") do
     tp = TextParser.new("1+2")
-    symbols = tp.parse
+    tokens = tp.parse
+    p tokens
 
-    expect(symbols.instance_of?(Array)).to eq true
-    expect(symbols.length).to eq 3
-    expect(symbols[0].instance_of?(Integer)).to eq true
-    expect(symbols[0]).to eq 1
-    expect(symbols[1].instance_of?(Integer)).to eq true
-    expect(symbols[1]).to eq 2
-    expect(symbols[2].instance_of?(String)).to eq true
-    expect(symbols[2]).to eq "+"
+    expect(tokens.instance_of?(Array)).to eq true
+    expect(tokens.length).to eq 3
+    expect(tokens[0].instance_of?(Integer)).to eq true
+    expect(tokens[0]).to eq 1
+    expect(tokens[1].instance_of?(Integer)).to eq true
+    expect(tokens[1]).to eq 2
+    expect(tokens[2].instance_of?(String)).to eq true
+    expect(tokens[2]).to eq "+"
   end
 
   it("Should success parse if first token is signed number") do
-    tokens = TextParser.new("-1+2").parse
+    tokens = TextParser.new("-1+-2").parse
+    p tokens
     expect(tokens[0]).to eq(-1)
-    expect(tokens[1]).to eq 2
-    expect(tokens[2]).to eq "+"
-
-    tokens = TextParser.new("+1+2").parse
-    expect(tokens[0]).to eq(1)
-    expect(tokens[1]).to eq 2
+    expect(tokens[1]).to eq(-2)
     expect(tokens[2]).to eq "+"
   end
 

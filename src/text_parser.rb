@@ -18,7 +18,6 @@ class TextParser
           consecutive_number = ""
         end
 
-        # 数字以外を見たとき、1つ前の文字が数字以外ならappend, そうでないなら数値の一部とみなす
         if index > 0 && is_number(@parse_target[index - 1])
           token_array.append(char)
         else

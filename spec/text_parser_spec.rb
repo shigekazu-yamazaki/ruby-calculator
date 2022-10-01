@@ -21,6 +21,18 @@ RSpec.describe TextParser do
     expect(symbols[2]).to eq "+"
   end
 
+  it("Should success parse if first token is signed number") do
+    tokens = TextParser.new("-1+2").parse
+    expect(tokens[0]).to eq(-1)
+    expect(tokens[1]).to eq 2
+    expect(tokens[2]).to eq "+"
+
+    tokens = TextParser.new("+1+2").parse
+    expect(tokens[0]).to eq(1)
+    expect(tokens[1]).to eq 2
+    expect(tokens[2]).to eq "+"
+  end
+
   it("Should return true when argument is number") do
     expect(TextParser.new("1+1").send(:is_number, "1")).to eq true
   end

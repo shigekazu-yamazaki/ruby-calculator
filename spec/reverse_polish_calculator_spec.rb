@@ -24,6 +24,11 @@ RSpec.describe ReversePolishCalculator do
     expect(ReversePolishCalculator.new([10, 2, "/"]).calculation).to eq 5
   end
 
+  it("Should success calculate if first token is signed number") do
+    # -1 + 2
+    expect(ReversePolishCalculator.new([-1, 2, "+"]).calculation).to eq 1
+  end
+
   it("Should fail calculate") do
     expect {
       ReversePolishCalculator.new([10, 2, "#"]).calculation

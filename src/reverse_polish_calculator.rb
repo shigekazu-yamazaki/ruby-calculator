@@ -8,6 +8,7 @@ class ReversePolishCalculator
     stack = []
 
     @calculation_target.each do |token|
+      p stack, token
       case token
       when Integer
         stack.push(token)

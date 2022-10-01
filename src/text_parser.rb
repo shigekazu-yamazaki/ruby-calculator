@@ -7,6 +7,11 @@ class TextParser
     token_array = []
     consecutive_number = ""
 
+    if %w[+ -].find { |char| char === @parse_target[0] }
+      consecutive_number << @parse_target[0]
+      @parse_target.slice!(0, 1)
+    end
+
     @parse_target.each_char do |char|
       if is_number(char)
         consecutive_number << char
